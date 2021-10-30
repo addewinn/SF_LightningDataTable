@@ -24,7 +24,10 @@ Dynamic Lightning Datatable populated using any field set from any SObject.
 ![DML](dml.png?raw=true "DML")
 
 
-## Known Issues to Resolve
+## TO DO's and Known Issues to Resolve
+
+### Lightning Data Table
+Provide full support for all cell attributes and types as outlined from [Lightning Datatabe Component Blueprint](https://developer.salesforce.com/docs/component-library/bundle/lightning-datatable/documentation "Component Bluerint")
 
 ### Component Bundle
 - Does not handle long text fields well when sorting.  Table can spill outside of component
