@@ -18,6 +18,7 @@ public with sharing class AuraDataTableController
     * @description converts field set on SObject to JSON object for use with Lightning Data Tables
     * @param sobjName the api name for the Sobject as a String.
     * @param fieldSetName the api name for the Field Set on the target Sobject
+	* @param initialRowsToLoad the number of records to initialize the table with
     * @return Datatable a wrapper class holding all of the elements of the data table
     **/
     @AuraEnabled
@@ -216,6 +217,8 @@ public with sharing class AuraDataTableController
         * @param fieldLabel the label to use as the column header
         * @param fieldName the api name of the field 
         * @param fieldType the field type for the column.  ie: text,date
+		* @param typeAttribute The type attributes for this column
+		* @param cellAttribute The cell attributes for this column
         * @param editable identifies if field can be edited in table
         * @param sortable identifies if field can be sorted in table
         **/
@@ -360,6 +363,7 @@ public with sharing class AuraDataTableController
         * @author Kevin Winn
         * @date May 16, 2020 
         * @description Constructor for the Apex Object
+		* @param dfr the Schema.DescribeFieldResult object
         **/
         public PercentType(Schema.DescribeFieldResult dfr)
         {
@@ -399,6 +403,7 @@ public with sharing class AuraDataTableController
         * @author Kevin Winn
         * @date May 16, 2020 
         * @description Constructor for the Apex Object
+		* @param dft The Schema.DescribeFieldResult object
         **/
         public DoubleType(Schema.DescribeFieldResult dfr)
         {
@@ -456,6 +461,7 @@ public with sharing class AuraDataTableController
     * @author Kevin Winn
     * @date May 16, 2020 
     * @description A list of Dynamic Sobjects to update from table
+	* @param draftValues the array of sobjects from the table requiring DML
     **/
     @AuraEnabled
     public static void updateDraftValues(List<SObject> draftValues)
@@ -507,6 +513,11 @@ public with sharing class AuraDataTableController
     * @author Kevin Winn
     * @date May 16, 2020 
     * @description The database query to populate the table
+	* @param queryFields the string list of fields to include in query
+	* @param sObjName the string name of the SObjectType
+	* @param queryFilters A Set of string filters to use in the query
+	* @param parentIdFilter if a parent Id exists, the where clause to include in the query string
+	* @return String
     **/
     private static string buildQueryString(List<String> queryFields,String sObjName,Set<String> queryFilters,String parentIdFilter)
     {
@@ -529,7 +540,10 @@ public with sharing class AuraDataTableController
     /**
     * @author Kevin Winn
     * @date May 16, 2020 
-    * @description The database query to populate the table
+    * @description helper to count returned record list size.  Used to assist infinite scroll function
+	* @param sObjName the name of the SObject to query
+	* @param parentIdFilter if not null, the parent Id to use in the where clause of the query string
+	* @return Integer the size of the array
     **/
     private static Integer getSetSize(String sObjName,String parentIdFilter)
     {
