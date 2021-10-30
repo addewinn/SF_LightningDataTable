@@ -1,0 +1,42 @@
+<design:component label="Denali Data Table">
+    <design:attribute 
+                      name="title" 
+                      label="Table Title" 
+                      description="The title for this table" 
+                      required="true"/>
+    <design:attribute 
+                      name="footer" 
+                      label="Table Footer" 
+                      description="The footer for this table" 
+                      required="true"/>
+    <design:attribute 
+                      name="sobjName" 
+                      label="SObject API Name" 
+                      description="The API name for the SObject where the Field Set is defined for this data table"
+                      default="Account" 
+                      required="true"/>
+	<design:attribute 
+                      name="fieldSetName" 
+                      label="Field Set Name"
+                      description="The API Name for the Field Set on the Target SObject"
+                      default="DataTable"
+                      required="true"/>
+	<design:attribute name="defaultSortDirection" 
+                      label="Default Sort Direction"
+                      description="asc OR desc"
+                      default="asc" />
+	<design:attribute name="sortedBy" 
+                      label="Sort by"
+                      Description="The API Name for the field in the table to initially sort data by"/>
+    <design:attribute name="resizeColumnDisabled" 
+                      label="Allow colum resizing"
+                      description="This component uses the auto feature to size the table.  Enable this option to allow users to resize the columns in the table" 
+                      default="false"/>
+    <design:attribute name="enableInfiniteLoading" 
+                      label="Enable Infinite Loading"
+                      description="If you expect more than 50 rows of data in your table enable this feature"
+                      default="false"/>
+    <design:attribute name="tableHeight" label="Table Height"
+                      description="Set the default height for the table on your page in pixels (ie: 300px)"
+                      default="auto"/>
+</design:component>

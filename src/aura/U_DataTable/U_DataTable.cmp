@@ -1,0 +1,123 @@
+<aura:component controller="AuraDataTableController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="Global">
+	<aura:attribute name="sobjName" type="String" default="RebalanceRule__c" />
+	<aura:attribute name="fieldSetName" type="String" default="DataTable"/>
+	<aura:attribute name="tableData" type="Object" default="{}"/>
+	<aura:attribute name="filteredTableData" type="Object" default="{}"/>
+	<aura:attribute name="filter" type="String" />
+	<aura:attribute name="tableColumns" type="List" default="[]"/>
+	<aura:attribute name="hideCheckBoxes" type="Boolean" default="true"/>
+	<aura:attribute name="showRowNumberColumn" type="Boolean" default="false"/>
+	<aura:attribute name="sortDirection" type="String" default="asc"/>
+	<aura:attribute name="defaultSortDirection" type="String" default="asc" />
+	<aura:attribute name="sortedBy" type="String" />
+	<aura:attribute name="selectedRowsCount" type="Integer" default="0"/>
+	<aura:attribute name="maxRowSelection" type="Integer" default="1"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="resizeColumnDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="minColumnWidth" type="Integer"/>
+    <aura:attribute name="maxColumnWidth" type="Integer"/>
+    <aura:attribute name="errors" type="Object" default="[]"/>
+    <aura:attribute name="draftValues" type="Object" default="[]"/>
+    <aura:attribute name="enableInfiniteLoading" type="Boolean" default="false"/>
+    <aura:attribute name="initialRows" type="Integer" default="10"/>
+    <aura:attribute name="rowsToLoad" type="Integer" default="25"/>
+    <aura:attribute name="totalNumberOfRows" type="Integer" default="0"/>
+    <aura:attribute name="totalRowsLoaded" type="Integer" default="0" />
+    <aura:attribute name="loadMoreOffset" type="Integer" default="20" />
+    <aura:attribute name="tableHeight" type="String" default="auto"/>
+    <aura:attribute name="loadMoreStatus" type="String" default=""/>
+    <aura:attribute name="title" type="String" default="Dynamic Data Table"/>
+    <aura:attribute name="footer" type="String" default="built with love by Denali"/>
+    <aura:attribute name="auraId" type="String" default="{!v.sobjName + '_' + v.fieldSetName}"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<article>
+		<lightning:messages />
+		<lightning:card class="slds-box slds-theme_default slds-border_bottom" title="{!v.title}">
+			<aura:set attribute="actions">	
+	          	<lightning:buttonIcon 
+	          		iconName="utility:undo" 
+	          		variant="border-filled" 
+	          		onclick="{!c.resetColumnWidths}" 
+	          		alternativeText="Reset Columns Width" 
+	          		title="Reset Column Widths" />
+	           	<lightning:buttonIcon 
+	           		iconName="utility:refresh" 
+	           		variant="border-filled" 
+	           		onclick="{!c.doInit}" 
+	           		alternativeText="Refresh Table" 
+	           		title="Refresh Table" />
+	           	<lightning:buttonIcon 
+	           		iconName="utility:upload" 
+	           		variant="border-filled" 
+	           		onclick="{!c.doInit}" 
+	           		alternativeText="Upload to Denali" 
+	           		title="Upload to Denali" />
+	           	<lightning:buttonIcon 
+	           		iconName="utility:download" 
+	           		variant="border-filled" 
+	           		onclick="{!c.doInit}" 
+	           		alternativeText="Download from Denali" 
+	           		title="Download from Denali" />
+	        </aura:set>
+	        <aura:set attribute="footer">
+	        	<div class="slds-p-around_xxx-small">
+	        		<p class="slds-p-around_xxx-small">
+	        			<aura:if isTrue="{!v.enableInfiniteLoading}">
+	        				{!v.footer}<br></br>{!v.loadMoreStatus}
+	        				<aura:set attribute="else">
+	        					{!v.footer}
+	        				</aura:set>
+	        			</aura:if>
+	        		</p>
+	        	</div>
+	        </aura:set>
+        	
+			<div style="{!'height:'+ v.tableHeight}">
+				<aura:if isTrue="{!v.isLoading}">
+					<lightning:spinner alternativeText="Loading" size="large" />
+				</aura:if>
+				<!--
+				<aura:if isTrue="{!v.totalNumberOfRows >= v.rowsToLoad}">
+					<div class="slds-clearfix">
+						<div class="slds-float_right slds-p-bottom_x-small slds-p-top_xxxsmall">
+							<lightning:input 
+								type="search" 
+								name="tableFilter"
+								onchange="{!c.filterTable}" 
+								value="{!v.filter}" 
+								label="Filter" 
+								variant="label-hidden"/>
+						</div>
+					</div>
+				</aura:if>
+			-->
+				<lightning:DataTable 
+					aura:id="{!v.auraId}"
+					data="{!v.tableData}"
+					columns="{!v.tableColumns}"
+					keyField="Id"
+					hideCheckboxColumn="{!v.hideCheckBoxes}"
+					showRowNumberColumn="{!v.showRowNumberColumn}"
+					defaultSortDirection="{!v.defaultSortDirection}"
+					sortedDirection="{!v.sortDirection}"
+					sortedBy="{!v.sortedBy}"
+					onsort="{!c.handleSort}"
+					maxRowSelection="{!v.maxRowSelection}"
+					onrowselection="{!c.handleSelectedRows}"
+					errors="{!v.errors }"
+				    draftValues="{!v.draftValues }"
+				    onsave="{!c.handleSaveEdition }"
+				    columnWidthsMode="auto"
+				    enableInfiniteLoading="{!v.enableInfiniteLoading}"
+				    loadMoreOffset="{!v.loadMoreOffset}"
+				    onloadmore="{!c.handleLoadMore}"
+				    onresize="{!c.storeColumnWidths}"
+				/>	
+			</div>		
+		</lightning:card>
+	</article>
+	
+		
+</aura:component>
