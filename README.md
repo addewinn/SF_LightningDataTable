@@ -50,7 +50,7 @@ Dynamic Lightning Datatable populated using any field set from any SObject.
 ![AuraDataTableDesignController.cls](docs/AuraDataTableDesignController.png?raw=true "Aura DataTable Design Controller")
 
 ## PMD
-![PMD](docs/PMD "PMD")
+[PMD](docs/PMD "PMD")
 
-#Code of Conduct
-![Contributing](./CODE_OF_CONDUCT.md "Code of Conduct")
+# Code of Conduct
+[Rules of the road for contributing to this repository](./CODE_OF_CONDUCT.md "Code of Conduct")
