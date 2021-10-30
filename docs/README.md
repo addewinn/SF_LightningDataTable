@@ -31,7 +31,7 @@ Dynamic Lightning Datatable populated using any field set from any SObject.
 - Does not handle rich text fields
 - Init handler on component is not calling Local Storage to size table on initial load (first view only.  Will handle properly on subsequent views)
 - Default column widths are too small
-- Alignment is not proper for all data tables.  Need to establish default left,right, center align for each possible field type
+- Alignment is not proper for data in columns.  Need to establish default left,right, center align for each possible field type
 - Connect or otherwise remove upload and download icons from toolbar icons on data table.  They do not currently do anything.
     - was thinking this could be managed with metadata references to endpoints mapped in those settings.
 
