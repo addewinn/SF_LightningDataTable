@@ -53,4 +53,4 @@ Dynamic Lightning Datatable populated using any field set from any SObject.
 [PMD](docs/PMD "PMD")
 
 # Code of Conduct
-[Rules of the road for contributing to this repository](./CODE_OF_CONDUCT.md "Code of Conduct")
+[Code of Conduct for this repository](./CODE_OF_CONDUCT.md "Code of Conduct")
