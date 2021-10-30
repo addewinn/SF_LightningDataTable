@@ -43,6 +43,11 @@ Dynamic Lightning Datatable populated using any field set from any SObject.
 
 ## Apex Docs
 [Apex Docs - Download folder and open Index.html](docs/ApexDocumentation/ "Apex Docs")
+### AuraDataTableController.cls
+![AuraDataTableController.cls](docs/AuraDataTableController.png?raw=true "Aura DataTable Controller")
+
+### AuraDataTableDesignController.cls
+![AuraDataTableDesignController.cls](docs/AuraDataTableDesignController.png?raw=true "Aura DataTable Design Controller")
 
 ## PMD
 [PMD](docs/PMD "PMD")
